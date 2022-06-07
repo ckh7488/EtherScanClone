@@ -1,0 +1,23 @@
+.upNav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    position: sticky;
+    top: 0;
+    
+}
+
+.upNav > img {
+    height: 60px;
+}
+
+
+.Mid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Mid > * {
+    margin-bottom: 25px;
+}

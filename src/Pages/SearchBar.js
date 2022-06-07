@@ -1,23 +1,29 @@
 import logo from '../logo-etherscan.svg';
+//react
+import { useState } from 'react';
 //router
-import { useNavigate } from 'react-router-dom';
-const SearchBar = ({ onChangeText, inputText }) => {
-    const navigate = useNavigate()
-    const clickSearch = ()=>{
-        const X = inputText;
-        navigate('/search',{state:{address:X}})
+import { Link } from 'react-router-dom';
+//CSS
+import './SearchBar.css';
+
+
+const SearchBar = ({isUp}) => {
+    console.log("SearchBar");
+    const [inputText, setInputText] = useState('');
+    const onChangeText = (e) => {
+        setInputText(e.target['value']);
     }
 
     return (
-        <div className="landingPage">
+        <div className={isUp ? "upNav":"Mid"}>
             <img src={logo} />
             <div>
                 <span>Address Name : </span>
                 <input
                     onChange={onChangeText}
                     value={inputText}
-                />
-                <button onClick={ clickSearch }>search</button>
+                    />
+                <Link to={`/search?address=${inputText}`}><button>search</button></Link>
 
             </div>
         </div>

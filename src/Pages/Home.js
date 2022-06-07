@@ -1,5 +1,11 @@
+import SearchBar from './SearchBar';
+
 const Home = ()=>{
-    return <></>
+    return (
+    <div className="landingPage">
+        <SearchBar isUp={false}  />
+    </div>
+    )
 }
 
 export default Home
