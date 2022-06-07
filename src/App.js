@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react'
+//load Pages
+import SearchPage from './Pages/SearchPage';
+import SearchBar from './Pages/SearchBar';
+import Home from './Pages/Home';
+//router
+import { Routes, Route } from "react-router-dom";
+
 
 function App() {
+
+  const [inputText, setInputText] = useState('');
+
+  const onChangeText = (e) => {
+      setInputText(e.target['value']);
+  }
+
+  console.log(inputText);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <SearchBar inputText={inputText} onChangeText={onChangeText} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/search" element={<SearchPage/>} />
+      </Routes>
+    </>
   );
 }
 
