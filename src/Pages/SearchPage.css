@@ -1,0 +1,26 @@
+.tableContainer {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.searchPageTable > * {
+    text-align: center;
+}
+
+.searchPageTable {
+    max-width: 90vw;
+    table-layout: fixed;
+}
+
+.searchPageTable > tbody > tr > td{
+    max-width: 10vw;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
