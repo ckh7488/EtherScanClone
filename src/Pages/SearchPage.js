@@ -11,22 +11,17 @@ const YourApiKeyToken = '6HXCSPI881QTMTHT3UWTTP4EVUZCE1VZ5J'
 // const addressString = '0xb1497712F0306228A2A92004A46902c25712Ba51'
 const divTOEthConst = 1000000000000000000;
 
-const SearchPage = () => {
+const SearchPage = (props) => {
     const [search] = useSearchParams();
     const [dataArr, setDataArr] = useState({});
-    const [isOk, setIsOk] = useState(true);
+    const [isOk, setIsOk] = useState(0);
     const myAddress = search.get("address");
     const now = new Date();
     
     
-    // console.log("SearchPage", myAddress, dataArr);
-    useEffect(()=>{
-        console.log(dataArr);
-    },[dataArr])
-
-
-    useEffect(() => {
-        setIsOk(true);     
+    useEffect( () => {
+        setIsOk(0);  
+        Promise.all([   
         axios({
             url: `https://api-ropsten.etherscan.io/api?module=account&action=balance&address=${myAddress}&tag=latest&apikey=${YourApiKeyToken}`,
             method: "GET",
@@ -36,10 +31,11 @@ const SearchPage = () => {
                 if (obj.data['message'] === 'OK') {
                     dataArr['balance'] = obj.data.result;
                     setDataArr({ ...dataArr });
+                    return true;
                 }
-                else { console.log("err from balance"); setIsOk(false); }
+                else { console.log("err from balance"); return false; }
             })
-
+        ,
         axios({
             url: `https://api-ropsten.etherscan.io/api?module=account&action=txlist&address=${myAddress}&startblock=0&endblock=99999999&page=1&offset=50&sort=desc&apikey=${YourApiKeyToken}`,
             method: "GET",
@@ -49,9 +45,15 @@ const SearchPage = () => {
                 if (obj.data.message === 'OK') {
                     dataArr['trxs'] = obj.data.result;
                     setDataArr({ ...dataArr });
+                    return true;
                 }
-                else { console.log("err from trx"); setIsOk(false); }
-            })
+                else { console.log("err from trx"); return false; }
+            })]
+        )
+        .then(ans=>{if(ans.filter(e=>e===false).length === 0 ) setIsOk(1); else {setIsOk(2)}})
+        .catch(err=> setIsOk(2))
+        
+        
     }, [myAddress]);
     //TODO : axios부분을 useEffect 사용해서 한번만 실행하게 하기 ( ,[]) 이런식
 
@@ -60,15 +62,17 @@ const SearchPage = () => {
 
     // search.get("address");
     return (
-        <>
+        <div key={props.pageId}>
             <SearchBar isUp={true} />
-            <button onClick={() => { console.log(dataArr) }}>test</button>
+            {/* <button onClick={() => { console.log(dataArr) }}>test</button> */}
             {
-                isOk !== true ?
-
-                    <div>잘못된 주소이거나, 이더스캔 api에 문제가 생겼습니다.</div>
+                isOk !== 1 ?
+                    isOk === 0 ? 
+                        <div>잠시 기다려주세요... </div>
+                        :
+                        <div>잘못된 주소이거나, 이더스캔 api에 문제가 생겼습니다.</div>
                     :
-                    Object.keys(dataArr).length == 2 ?
+                    Object.keys(dataArr).length === 2 ?
                         // style 필요없는듯?
                         <div className='tableContainer'>               
                             <div>Address : {myAddress}</div>
@@ -92,7 +96,7 @@ const SearchPage = () => {
                                     {
                                         dataArr[`trxs`].map((trx,idx) => {
                                             return (
-                                                <tr>
+                                                <tr key={idx}>
                                                     <th>{idx+1}</th>
                                                     <td>{trx['hash']}</td>
                                                     <td>{trx['input']}</td>
@@ -113,7 +117,7 @@ const SearchPage = () => {
                         :
                         <div></div>}
 
-        </>
+        </div>
     );
 }
 
