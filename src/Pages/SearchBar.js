@@ -1,3 +1,4 @@
+import React from 'react';
 import logo from '../logo-etherscan.svg';
 //react
 import { useState } from 'react';

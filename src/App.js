@@ -1,11 +1,12 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 import './App.css';
 //load Pages
 import SearchPage from './Pages/SearchPage';
-import SearchBar from './Pages/SearchBar';
 import Home from './Pages/Home';
 //router
 import { Routes, Route } from "react-router-dom";
-import { queryAllByAltText } from '@testing-library/react';
+
 
 
 function App() {

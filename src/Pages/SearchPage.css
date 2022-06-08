@@ -1,3 +1,4 @@
+/* table css */
 .tableContainer {
     display: flex;
     flex-direction: column;
@@ -24,3 +25,49 @@
 table, th, td {
     border: 1px solid black;
 }
+/* table end */
+
+
+/* card css */
+.containerCenter {
+    max-width: 100vw;
+    display: flex;
+    justify-content: center;
+    
+}
+.containerCard {
+    display: flex;
+    justify-content: center;
+    width: 90vw;
+}
+
+.containerCard > card {
+    margin : 1vw;
+}
+
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 30vw;
+    min-width: 400px;
+    height: 15vh;
+    word-break: break-all;
+    margin: 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  /* card end */
+
+
+  /* text center */
+  .textCenter {
+      text-align: center;
+      line-height: 150%;
+
+  }
