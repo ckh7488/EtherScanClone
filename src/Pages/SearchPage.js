@@ -3,10 +3,9 @@ import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 //Pages
-import SearchBar from './SearchBar';
+import TopNav from '../Components/TopNav';
 //css
-import './SearchPage.css'
-import { isFocusable } from '@testing-library/user-event/dist/utils';
+import styles from './SearchPage.module.css'
 
 const YourApiKeyToken = '6HXCSPI881QTMTHT3UWTTP4EVUZCE1VZ5J'
 const divTOEthConst = 1000000000000000000;
@@ -59,27 +58,27 @@ const SearchPage = (props) => {
 
     // search.get("address");
     return (
-        <div key={props.pageId}>
-            <SearchBar isUp={true} />
+        <div className={styles.OuterMost}>
+            <TopNav />
             {/* <button onClick={() => { console.log(dataArr) }}>test</button> */}
             {
                 isOk !== 1 ?
                     isOk === 0 ?
-                        <div>잠시 기다려주세요... </div>
+                        <div className={`${styles.tmpBox} w3-center`}><div><p>잠시 기다려주세요... </p></div></div>
                         :
-                        <div>잘못된 주소이거나, 이더스캔 api에 문제가 생겼습니다.</div>
+                        <div className={`${styles.tmpBox} w3-center`}><div><p>잘못된 주소입니다.</p></div></div>
                     :
                     Object.keys(dataArr).length === 2 ?
                         <>
-                            <div className='containerCenter'>
-                                <span className='containerCard'>
-                                    <div className='card'><span className='textCenter'>Address<br/>{myAddress}</span></div>
-                                    <div className='card'><span className='textCenter'>balance<br></br>{dataArr['balance'] / divTOEthConst} ether</span></div>
+                            <div className={styles.containerCenter}>
+                                <span className={styles.containerCard}>
+                                    <div className={`${styles.card}`}><span className={styles.textCenter}>Address<br/>{myAddress}</span></div>
+                                    <div className={styles.card}><span className={styles.textCenter}>balance<br></br>{dataArr['balance'] / divTOEthConst} ether</span></div>
                                 </span>
                             </div>
-                            <div className='tableContainer'>
+                            <div className={styles.tableContainer}>
                                 <br />
-                                <table className='searchPageTable'>
+                                <table className={`${styles.searchPageTable} w3-table w3-hoverable`}>
                                     <thead>
                                         <tr>
                                             <th>#</th>

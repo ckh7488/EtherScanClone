@@ -1,9 +1,13 @@
-import React, { Component} from 'react';
-import SearchBar from './SearchBar';
+import React from 'react';
+//componenet
+import TopNav from '../Components/TopNav';
+import SearchBar from '../Components/SearchBar';
+//css
+import styles from './Home.module.css'
 
 const Home = ()=>{
     return (
-    <div className="landingPage">
+    <div className= {styles.OuterMost}>
         <SearchBar isUp={false}  />
     </div>
     )

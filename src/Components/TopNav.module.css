@@ -1,0 +1,41 @@
+.topNav {  
+    padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    position: sticky;
+    top: 0;
+    flex-wrap: wrap;
+}
+
+.topNav > :first-child {
+    flex-grow: 20;
+}
+
+/* menu */
+.menuContainer {
+    height: 65px;
+    width: 65px;
+}
+
+.menuContainer > *::after{
+    float: right;
+    position: absolute;
+}
+
+.menu  {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end ;
+}
+
+.icon {
+    min-height: 60px;
+    min-width: 60px;
+    text-align: center;
+}
+
+
+
+/* menu end */

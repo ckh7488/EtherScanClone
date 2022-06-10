@@ -1,3 +1,9 @@
+.OuterMost {
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+
 /* table css */
 .tableContainer {
     display: flex;
@@ -68,6 +74,28 @@ table, th, td {
   /* text center */
   .textCenter {
       text-align: center;
-      line-height: 150%;
+      line-height: 250%;
 
   }
+
+
+  /* tmpBox */
+
+  .tmpBox {
+      min-width: 40vw;
+      min-height: 20vh;
+      display: flex;
+      justify-content: center;
+  }
+
+  .tmpBox > * {
+      display: flex;
+      align-items: center;
+      min-height: 20vh;
+      
+      
+
+  }
+
+
+  /* tmpBox end */

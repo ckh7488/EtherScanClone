@@ -1,9 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import './App.css';
 //load Pages
 import SearchPage from './Pages/SearchPage';
 import Home from './Pages/Home';
+import TestPage from './Pages/TestPage'
 //router
 import { Routes, Route } from "react-router-dom";
 
@@ -19,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/test" element={<TestPage/>} />
       </Routes>
     </>
   );
