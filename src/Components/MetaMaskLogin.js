@@ -1,7 +1,6 @@
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 import React, { useEffect, useState } from "react";
 //css
-import styes from './MetaMaskLogin.module.css';
+import styles from './MetaMaskLogin.module.css';
 
 const MetaMaskLogin = ({cb}) => {
     const [isMetaMask, setIsMetaMask] = useState(false);
@@ -41,7 +40,7 @@ const MetaMaskLogin = ({cb}) => {
 
     return (
         <>
-            <button onClick={onClickConnect} className='w3-button w3-block'  >
+            <button onClick={onClickConnect} className={`${styles.changeFont} w3-button w3-block`}  >
                 {
                 isMetaMask ?  (account==='' ? '지갑연결' : account)  : '메타마스크를 설치해야합니다'
                 }

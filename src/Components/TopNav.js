@@ -7,7 +7,7 @@ import MetaMaskLogin from './MetaMaskLogin'
 //img
 //import logo from '../logo-etherscan.svg'
 
-const TopNav = ()=>{
+const TopNav = ({noSearch})=>{
     const [isMenuClick, setIsMenuClick] = useState(false);
 
     const onMenuClick = ()=> {
@@ -23,7 +23,7 @@ const TopNav = ()=>{
     return (
 
         <div className={`w3-white ${styles.topNav}`}>
-            <SearchBar isUp={true} />
+            {noSearch ? '' : <SearchBar isUp={true} /> }        
             <div className={styles.menuContainer}>
                 <div className={styles.menu}>
                     <p className= {`${styles.icon} w3-button`} onClick={onMenuClick}>☰</p>

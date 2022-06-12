@@ -2,8 +2,9 @@ import React from 'react'
 import axios from 'axios';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-//Pages
+//Component
 import TopNav from '../Components/TopNav';
+import BlockInfo from '../Components/BlockInfo';
 //css
 import styles from './SearchPage.module.css'
 
@@ -12,10 +13,20 @@ const divTOEthConst = 1000000000000000000;
 
 const SearchPage = (props) => {
     const [search] = useSearchParams();
+
     const [dataArr, setDataArr] = useState({});
     const [isOk, setIsOk] = useState(0);
+    const [showBlockInfo, setShowBlockInfo] = useState('');
+
     const myAddress = search.get("address");
     const now = new Date();
+
+
+const onClickBlock = (blockid) => {
+    console.log(blockid);
+    // setShowBlockInfo('');
+    setShowBlockInfo(blockid);
+}
 
 
     useEffect(() => {
@@ -39,7 +50,7 @@ const SearchPage = (props) => {
                 url: `https://api-ropsten.etherscan.io/api?module=account&action=txlist&address=${myAddress}&startblock=0&endblock=99999999&page=1&offset=50&sort=desc&apikey=${YourApiKeyToken}`,
                 method: "GET",
             })
-                // .then(tmp => { console.log(tmp); return tmp; })
+                .then(tmp => { console.log(tmp); return tmp; })
                 .then(obj => {
                     if (obj.data.message === 'OK') {
                         dataArr['trxs'] = obj.data.result;
@@ -56,10 +67,12 @@ const SearchPage = (props) => {
     }, [myAddress]);
 
 
-    // search.get("address");
+    
     return (
         <div className={styles.OuterMost}>
             <TopNav />
+            {showBlockInfo.length > 0 ? <BlockInfo blockId={showBlockInfo}/>: ''}
+            {/* <button onClick={ ()=>{setShowBlockInfo('')} }>hi</button> */}
             {/* <button onClick={() => { console.log(dataArr) }}>test</button> */}
             {
                 isOk !== 1 ?
@@ -100,7 +113,7 @@ const SearchPage = (props) => {
                                                         <th>{idx + 1}</th>
                                                         <td>{trx['hash']}</td>
                                                         <td>{trx['input']}</td>
-                                                        <td>{trx['blockNumber']}</td>
+                                                        <td onClick={()=>{onClickBlock(trx.blockNumber)}} className='w3-button' style={{border: 'black 1px solid'}}>{trx['blockNumber']}</td>
                                                         <td>{Math.floor((now / 1000 - parseInt(trx['timeStamp'])) / 3600)} h</td>
                                                         <td>{trx['from']}</td>
                                                         <td>{trx['to']}</td>
@@ -116,7 +129,8 @@ const SearchPage = (props) => {
                             </div>
                         </>
                         :
-                        <div></div>}
+                        <div></div>
+            }
 
         </div>
 

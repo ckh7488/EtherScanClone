@@ -1,0 +1,19 @@
+.modalContainer {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    position: fixed;    
+    top: 15vh;
+    bottom: 15vh;
+    left: 30vw;
+    right: 30vw;
+
+    border: solid 1px black;
+
+    overflow: auto;
+
+    background-color: antiquewhite;
+}

@@ -8,6 +8,7 @@ import styles from './Home.module.css'
 const Home = ()=>{
     return (
     <div className= {styles.OuterMost}>
+        <div className={styles.topNavContainer}><TopNav noSearch={true}/></div>
         <SearchBar isUp={false}  />
     </div>
     )
